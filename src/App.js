@@ -45,15 +45,14 @@ export class App extends React.Component {
 	}
 	
 	getDataFromProps() {
-		axios.get("/users/1").then(
-			(data) => {
-				console.log(data);
-				this.setState({...this.state, user: data.data[0]});
-			},
-			(error) => {
-				this.setState({...this.state, errorInfo: error});
-			}
-		);
+		axios.get("/users/1")
+		.then(data => {
+			console.log(data);
+			this.setState({...this.state, user: data.data[0]});
+		})
+		.catch(error => {
+			this.setState({...this.state, errorInfo: error});
+		});
 	}
 	
 	componentWillMount() {
@@ -61,17 +60,16 @@ export class App extends React.Component {
 	}
 	
 	applyJob = (job) => {
-		axios.post("/apply", {user_id: this.state.user.id, job_ids: [job.id]}).then(
-			(data) => {
-				if(data.data.success){
-					message.success("Job applied successfully");
-					this.setState({...this.state, user : {applied_jobs: [...this.state.user.applied_jobs, job]}});
-				}
-			},
-			(error) => {
-				this.setState({...this.state, errorInfo: error});
+		axios.post("/apply", {user_id: this.state.user.id, job_ids: [job.id]})
+		.then(data => {
+			if(data.data.success){
+				message.success("Job applied successfully");
+				this.setState({...this.state, user : {applied_jobs: [...this.state.user.applied_jobs, job]}});
 			}
-		);
+		})
+		.catch(error => {
+			this.setState({...this.state, errorInfo: error});
+		});
 	}
 	
 

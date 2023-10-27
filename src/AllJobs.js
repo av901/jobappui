@@ -17,15 +17,13 @@ export class AllJobs extends React.Component {
 	}
 	
 	getDataFromProps() {
-		axios.get("/jobs/all").then(
-			(data) => {
-				console.log(data);
-				this.setState({...this.state, jobs: data.data});
-			},
-			(error) => {
-				this.setState({...this.state, errorInfo: error});
-			}
-		);
+		axios.get("/jobs/all")
+		.then(data => {
+			this.setState({...this.state, jobs: data.data});
+		})
+		.catch(error => {
+			this.setState({...this.state, errorInfo: error});
+		});
 	}
 	
 	componentDidMount() {
