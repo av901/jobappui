@@ -11,7 +11,6 @@ export class AllJobs extends React.Component {
 		this.state = {
 		  loading: false,
 		  jobs: [],
-		  appliedJobs: props.appliedJobs,
 		  errorInfo : ""
 		};
 	}
